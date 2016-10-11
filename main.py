@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request,jsonify
-
-from flask.ext.sqlalchemy import SQLAlchemy
-import json
-import  logging
+from flask_sqlalchemy import SQLAlchemy
+# import json
+# import  logging
 # logging.basicConfig()
 # logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
