@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,jsonify
 from flask_sqlalchemy import SQLAlchemy
-# import json
+import json
 # import  logging
 # logging.basicConfig()
 # logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
@@ -25,20 +25,21 @@ class Product(db.Model):
 def getNews(new_id):
     result = db.session.execute('SELECT * From t_info_news WHERE NEWS_ID = %d;' % new_id)
     print('------')
-    # results = result.fetchall()
-    # dict = []
-    # for row in results:
-    #     dict.append(row.items())
-    #     print(type(row.items()))
+    row = result.fetchall()[0]
+
+    jsonDict = dict(row.items())
+
+    for k, v in jsonDict.items():
+        if type(v) != type(""):
+            jsonDict[k] = str(v)
 
 
-    title = result.fetchall()[0].items()[1][1]
-    print(type(title))
-    print(title)
+    # print(json.dumps(jsonDict))
 
-    # print(json.dumps(dict))
     print('------')
-    return title
+    return jsonDict
+
+
 
 
 
@@ -54,14 +55,14 @@ def hello_world():
 @app.route('/new/<int:new_id>')
 def new(new_id):
     title = getNews(new_id)
-    return 'New %s' % title
+    return json.dumps(title,ensure_ascii=False)
 
 
 
 
 if __name__ == '__main__':
 
-    getNews(2)
+    getNews(1)
     # users = Product.query.all()
     # result = db.session.execute('SELECT * From t_info_news;')
     # for row in result:
