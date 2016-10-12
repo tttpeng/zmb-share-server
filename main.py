@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,jsonify
+from flask import Flask, render_template, request,jsonify,Response
 from flask_sqlalchemy import SQLAlchemy
 import json
 # import  logging
@@ -55,7 +55,8 @@ def hello_world():
 @app.route('/new/<int:new_id>')
 def new(new_id):
     title = getNews(new_id)
-    return json.dumps(title,ensure_ascii=False)
+    # return 'asd'
+    return Response(json.dumps(title), mimetype='application/json')
 
 
 
