@@ -5,9 +5,31 @@ import json
 # logging.basicConfig()
 # logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
+
+
+import logging
+# 创建一个logger
+logger = logging.getLogger('mylogger')
+logger.setLevel(logging.DEBUG)
+# 创建一个handler，用于写入日志文件
+fh = logging.FileHandler('/Users/tpeng/Desktop/test.log')
+fh.setLevel(logging.DEBUG)
+# 再创建一个handler，用于输出到控制台
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+# 定义handler的输出格式
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+# 给logger添加handler
+logger.addHandler(fh)
+logger.addHandler(ch)
+# 记录一条日志
+
+
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/zmb'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://zhongmeban_share:Zhongmeban123@rds9i2oey14eccx3h4qh.mysql.rds.aliyuncs.com/zhongmeban_release3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/zmb'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://zhongmeban_share:Zhongmeban123@rds9i2oey14eccx3h4qh.mysql.rds.aliyuncs.com/zhongmeban_release3'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_ECHO'] = True
@@ -58,6 +80,12 @@ def new(new_id):
     # return 'asd'
     return Response(json.dumps(title), mimetype='application/json')
 
+@app.route('/notify_url',methods=['POST'])
+def notify():
+    logger.info('heiheie----')
+    logger.info(request.form)
+    logger.info('heiheie----')
+    print(request.form)
 
 
 
