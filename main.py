@@ -28,8 +28,8 @@ logger.addHandler(ch)
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/zmb'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://zhongmeban_share:Zhongmeban123@rds9i2oey14eccx3h4qh.mysql.rds.aliyuncs.com/zhongmeban_release3'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/zmb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://zhongmeban_share:Zhongmeban123@rds9i2oey14eccx3h4qh.mysql.rds.aliyuncs.com/zhongmeban_release3'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_ECHO'] = True
