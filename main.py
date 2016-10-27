@@ -86,6 +86,7 @@ def notify():
     logger.info(request.form)
     logger.info('heiheie----')
     print(request.form)
+    return 'notifiy'
 
 
 
